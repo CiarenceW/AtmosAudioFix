@@ -63,6 +63,19 @@ namespace AtmosAudioFix
             rank = ((RankingProgressionGameMode)RCS.game_mode).progression_data.receiver_rank;
             var ambient_parent = transform.Find(string.Format("/{0}", atmos_names[rank]));
 
+            if (ambient_parent == null) //if the skybox isn't equal to the rank, some custom campaigns do that.
+            {
+                for (int i = 0; i < atmos_names.Length; i++)
+                {
+                    ambient_parent = transform.Find(string.Format("/{0}", atmos_names[i]));
+                    if (ambient_parent != null)
+                    {
+                        Debug.LogFormat("YOOOOOOOO FOUND IT: {0}", atmos_names[i]);
+                        break;
+                    }
+                }
+            }
+
             if (ambient_parent != null)
             {
                 /*foreach (Transform atmos_transform in ambient_parent.transform)
@@ -89,7 +102,7 @@ namespace AtmosAudioFix
             }
             else
             {
-                Debug.LogError("the fucking thing is null, fuckface");
+                Debug.LogError("the fucking thing is null, fuckface (me, creator of the mod)");
             }
         }
     }
