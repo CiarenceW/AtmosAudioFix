@@ -38,7 +38,7 @@ namespace AtmosAudioFix
 
             configAmbientVolume = Config.Bind("Volume",
                 "AmbientVolume",
-                0.2f, //is 1 supposed to be max volume? because even at 0.5f it's pretty damn fucking loud.
+                0.5f, //is 1 supposed to be max volume? because even at 0.5f it's pretty damn fucking loud.
                 new ConfigDescription("The volume of the emitter.", new AcceptableValueRange<float>(0f, 1f)));
 
             configAmbientVolume.SettingChanged += (object sender, EventArgs args) =>
@@ -84,7 +84,7 @@ namespace AtmosAudioFix
                 ambient_emitter = ambient_parent.GetChild(0);
                 ambient_emitter.GetComponent<StudioEventEmitter>().EventInstance.setVolume(configAmbientVolume.Value);
                 ambient_emitter.parent = RCS.player.player_object.transform;
-                ambient_emitter.localPosition = Vector3.zero;
+                ambient_emitter.localPosition = new Vector3(0f, -5f, 0f);
                 ambient_emitter.localRotation = Quaternion.identity;
             }
             else
